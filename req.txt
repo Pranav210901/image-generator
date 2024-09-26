@@ -1,7 +1,7 @@
 torch>=1.4
 diffusers==0.10.2
 transformers
-pyngrok=4.1.1
+pyngrok==4.1.1
 flask_ngrok
 scipy
 ftfy
