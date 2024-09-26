@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMG.AI - Image Generation</title>
+    <style>
+        body {
+            background-color: #ad96f3;
+            font-family: monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;  /* Center horizontally */
+            align-items: center;      /* Center vertically */
+            height: 100vh;           /* Full viewport height */
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;              /* Ensure it uses full width */
+            text-align: center;       /* Center text in the container */
+        }
+        .logo {
+            width: 250px; /* Set logo width */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space between logo and card */
+        }
+        .card {
+            background-color: #8d91f5;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: rgb(0, 0, 0);
+            margin-bottom: 20px;
+        }
+        .output-image {
+            margin-top: 20px; /* Ensure spacing between form and output */
+            display: flex; /* Flexbox for centering */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .placeholder {
+            height: 200px;
+            width: 100%; /* Full width */
+            background: #efa2d7;
+            border-radius: 8px;
+            color: #aaa;
+            font-size: 1.2em;
+            display: flex; /* Flexbox to center content */
+            align-items: center;
+            justify-content: center;
+        }
+        .btn {
+            background-color: #fcacd9;
+            color: #190202;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #e69dcf;
+        }
+        .form-group {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            border-radius: 10px; /* Rounded edges */
+            border: 1px solid #ccc; /* Border color */
+            padding: 10px; /* Padding for better appearance */
+            width: 20%; /* Full width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo placed above the card -->
+        <a href="{{ url_for('init') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Logo" />
+        </a>
+        
+        <!-- Card for content -->
+        <div class="card">
+            <div class="card-body">
+                <h1>IMG.AI</h1>
+                <form id="imageForm" action="/submit" method="post">
+                    <div class="form-group">
+                        <label for="query">Enter your image query:</label>
+                        <input type="text" id="query" name="query" class="form-control"
+                        placeholder="What image do you want to generate?" value="{{ que }}" required style=" margin-top: 15px; border-color: #fcacd9; background-color: #fcacd9;" />
+                    </div>
+                    <button type="submit" class="btn">Generate Image</button>
+                </form>
+                <div class="output-image">
+                    {% if generated_image %}
+                        <h3>Generated Image:</h3>
+                        <img src="{{ generated_image }}" alt="Generated Image" style="max-width: 400px; height: auto;">
+                    {% else %}
+                        <div class="placeholder" id="noImages" style="color: #190202;">No images generated yet.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
