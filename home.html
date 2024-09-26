@@ -97,7 +97,7 @@
             <div class="card-body">
                 <a href="{% url 'home' %}"><img src="logo.png" class="img-responsive logo mb-3" style="width: 250px; height: auto;" /></a>
                 <h1 style = 'font-family: monospace;'>IMG.AI</h1>
-                <form id="imageForm">
+                <form action="\submit" method="post" id="submission-form">
                     <div class="form-group">
                         <label for="query">Enter your image query:</label>
                         <input type="text" name="query" class="form-control"
@@ -123,7 +123,7 @@
                 const query = $('#query').val().trim();
                 if(query) {
                     const imageURL = `https://via.placeholder.com/600x400.png?text=Generated+Image+for+${encodeURIComponent(query)}`;
-                    $('.image-grid').append(`<div><img src="${imageURL}" alt="Generated Image for ${query}"></div>`);
+                    $('.image-grid').append(`<div><img src="${generated_image}" alt="Generated Image for ${query}"></div>`);
                     $('#query').val(''); // Clear the input field
                     $('#noImages').hide(); // Hide the placeholder message
                 }
